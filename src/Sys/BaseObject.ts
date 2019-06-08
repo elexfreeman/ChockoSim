@@ -3,11 +3,12 @@
  */
 export default class BaseObject {
 
-    constructor(date) {
+    /**
+     * Здесь описываются изменение состояние объекта во времени
+     */
+    public async Tick() {
 
     }
 
-    public Tick() {
 
-    }
 }

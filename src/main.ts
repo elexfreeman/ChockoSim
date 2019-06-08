@@ -1,11 +1,13 @@
-import * as moment from 'moment';
 import SysMoment from './Sys/SysMoment';
 
 let tick;
 
 const date = new SysMoment();
 
-tick = setInterval(() => {
-    date.Tick();
+tick = setInterval(async () => {    
+    await date.Tick();
     date.Print();
-}, 500);
+
+    console.log(date.Life());
+}, 500); 
+
