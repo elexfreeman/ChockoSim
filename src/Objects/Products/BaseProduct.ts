@@ -40,7 +40,7 @@ export default class BaseProduct extends BaseObject {
        
         /* проверка просроченности */
         if (this.date.Life() > this.shelfLife ) {
-            this.isExpired = true;
+            this.isExpired = true;           
         }
     }
 

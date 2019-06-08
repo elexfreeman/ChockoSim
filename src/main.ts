@@ -20,16 +20,17 @@ let testP = new BaseProduct(date, product);
 
 tick = setInterval(async () => { 
 
+    /* вызыв общих тиков */
     date.Tick();
-    
+    EventMaker.Tick();
 
     console.log('');
     console.log('');
     console.log('=================================');
     date.Print();
-    console.log(date.Life());
-
-    EventMaker.dispatch();
+    console.log(date.Life());    
     EventMaker.Print();
+
+    
 }, 500); 
 

@@ -5,24 +5,34 @@ import BaseObject from './BaseObject';
  */
 class EventMaker {
 
+    /* массив обрабатываемых объектов */
     private objects: BaseObject[] = [];
 
+    /**
+     * Добавляет в общий цикл объект
+     * @param item - базавой любой объект
+     */
     public Add(item: BaseObject) {
         this.objects.push(item);
     }
 
-    public dispatch() {
+    /**
+     * срабатыванеи общего события Tick()
+     */
+    public Tick() {
+
         for (let i = 0; i < this.objects.length; i++) {
 
             /* если объект удаленый */
             if (this.objects[i].isDeleted) {
                 delete this.objects[i];
+                this.objects.splice(i, 1);
             } else {
                 /* отрабатываем тик */
                 this.objects[i].Tick();
             }
-
         }
+
     }
 
     public Print() {
