@@ -5,7 +5,7 @@ import SysMoment from '../../Sys/SysMoment';
 /**
  * Базовый продукт
  */
-export default class BaseProduct extends BaseObject {   
+export default class BaseProduct extends BaseObject {
 
     /* Основние свойства продукта */
     public id?: number;
@@ -22,7 +22,7 @@ export default class BaseProduct extends BaseObject {
      * @param date - дата создания
      */
     constructor(date: SysMoment, item: any) {
-        super(date);      
+        super(date);
 
         this.id = item['id'];
         this.caption = item['caption'];
@@ -37,10 +37,12 @@ export default class BaseProduct extends BaseObject {
      * Во времени изменяется состояние просроченности shelfLife
      */
     public async Tick() {
-       
+
         /* проверка просроченности */
-        if (this.date.Life() > this.shelfLife ) {
-            this.isExpired = true;           
+        if (this.date.Life() > this.shelfLife) {
+            this.isExpired = true;            
+            /* если продукт просрочен то его базовая стоимость = 0 */
+            this.basePrice = 0;
         }
     }
 

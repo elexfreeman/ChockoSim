@@ -1,5 +1,6 @@
 import BaseObject from '../../Sys/BaseObject';
 import BaseProduct from './BaseProduct';
+import BasePackage from './BasePackage';
 import SysMoment from '../../Sys/SysMoment';
 
 /**
@@ -8,9 +9,10 @@ import SysMoment from '../../Sys/SysMoment';
 export class BaseMerchandise extends BaseObject {
 
     public product: BaseProduct;
+    public package: BasePackage;
 
     public addPrice: number; // надбавка в % на основную стоимость товара
-    public packagePrice: number; // стоимость упаковки
+
 
     /**
      * 
@@ -18,18 +20,17 @@ export class BaseMerchandise extends BaseObject {
      * @param addPrice - надбавочная стоимость
      * @param packagePrice - стоимость упаковки
      */
-    constructor(date: SysMoment, product: BaseProduct, addPrice: number, packagePrice: number) {
+    constructor(date: SysMoment, product: BaseProduct, addPrice: number) {
         super(date);
-        this.product = product;        
-        this.addPrice = addPrice;        
-        this.packagePrice = packagePrice;        
+        this.product = product;
+        this.addPrice = addPrice;
     }
 
     /**
      * стоимость товара
      */
     get price() {
-        return Math.round(this.product.basePrice + ((this.product.basePrice * this.addPrice) / 100)) - this.packagePrice;
+        return Math.round(this.product.basePrice + ((this.product.basePrice * this.addPrice) / 100)) - this.package.price;;
     }
 
 }

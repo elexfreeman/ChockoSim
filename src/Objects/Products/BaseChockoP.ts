@@ -4,10 +4,14 @@ import SysMoment from '../../Sys/SysMoment';
 /**
  * Шоколадка
  */
-export default class ChockoP extends BaseProduct {
+export default class BaseChockoP extends BaseProduct {
 
     public chockoBin: number; // процент содержания какао
     public milk: number; // процент содержания молока
+    public cocoaOil: number; // процент содержания какао масла
+    public sugar: number; // процент содержания сахара
+    public dye: BaseProduct[]; // красители
+    public filler: BaseProduct[]; // наполнитель
 
     /**
      * 
@@ -18,6 +22,8 @@ export default class ChockoP extends BaseProduct {
      *  shelfLife: number;
      *  chockoBin: number;
      *  milk: number;
+     *  dye: BaseProduct[];
+     *  filler: BaseProduct[];
      * }
      * @param date 
      */
