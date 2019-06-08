@@ -1,8 +1,10 @@
 import * as moment from 'moment';
 
-import BaseObject from './BaseObject';
 
-export default class SysMoment implements BaseObject {
+/**
+ * Счетчик времени
+ */
+export default class SysMoment {
 
     public date: any;
     public startAt: string;
@@ -15,7 +17,7 @@ export default class SysMoment implements BaseObject {
     /**
      * увеличивается дата
      */
-    public async Tick() {
+    public Tick() {
         this.date.add(1, 'hours');
     }
 

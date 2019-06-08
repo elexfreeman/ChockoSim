@@ -4,7 +4,7 @@ import SysMoment from '../../Sys/SysMoment';
 /**
  * Шоколадка
  */
-export default class ChockoP extends BaseProduct {    
+export default class ChockoP extends BaseProduct {
 
     public chockoBin: number; // процент содержания какао
     public milk: number; // процент содержания молока
@@ -21,8 +21,8 @@ export default class ChockoP extends BaseProduct {
      * }
      * @param date 
      */
-    constructor(item: any, date: SysMoment) {
-        super(item, date);
+    constructor(date: SysMoment, item: any) {
+        super(date, item);
 
         this.chockoBin = item['chockoBin'];
         this.milk = item['milk'];

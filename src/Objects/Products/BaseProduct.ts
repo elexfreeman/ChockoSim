@@ -5,13 +5,12 @@ import SysMoment from '../../Sys/SysMoment';
 /**
  * Базовый продукт
  */
-export default class BaseProduct extends BaseObject {
+export default class BaseProduct extends BaseObject {   
 
-    private date: SysMoment;
-
+    /* Основние свойства продукта */
     public id?: number;
     public caption: number; // название   
-    public price: number; // цена
+    public basePrice: number; // себестоимость
     public shelfLife: number; //срок годности в днях
     public createAt: string; // дата производства
     public isExpired: boolean; // продукт просрочен
@@ -22,14 +21,12 @@ export default class BaseProduct extends BaseObject {
      * @param item - основные поля из DB
      * @param date - дата создания
      */
-    constructor(item: any, date: SysMoment) {
-        super();
-
-        this.date = date;
+    constructor(date: SysMoment, item: any) {
+        super(date);      
 
         this.id = item['id'];
         this.caption = item['caption'];
-        this.price = item['price'];
+        this.basePrice = item['basePrice'];
         this.shelfLife = item['shelfLife'];
         this.createAt = date.Now();
         this.isExpired = false;
@@ -50,7 +47,7 @@ export default class BaseProduct extends BaseObject {
     public Print() {
         console.log('id: ', this.id);
         console.log('caption: ', this.caption);
-        console.log('price: ', this.price);
+        console.log('basePrice: ', this.basePrice);
         console.log('shelfLife: ', this.shelfLife);
         console.log('createAt: ', this.createAt);
     }
