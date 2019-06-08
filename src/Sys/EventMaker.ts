@@ -19,7 +19,7 @@ class EventMaker {
     /**
      * срабатыванеи общего события Tick()
      */
-    public Tick() {
+    public async Tick() {
 
         for (let i = 0; i < this.objects.length; i++) {
 
@@ -29,7 +29,7 @@ class EventMaker {
                 this.objects.splice(i, 1);
             } else {
                 /* отрабатываем тик */
-                this.objects[i].Tick();
+                await this.objects[i].Tick();
             }
         }
 
