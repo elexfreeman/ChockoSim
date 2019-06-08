@@ -50,6 +50,7 @@ export default class BaseProduct extends BaseObject {
         console.log('basePrice: ', this.basePrice);
         console.log('shelfLife: ', this.shelfLife);
         console.log('createAt: ', this.createAt);
+        console.log('isExpired: ', this.isExpired);
     }
 
 

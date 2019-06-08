@@ -25,6 +25,12 @@ class EventMaker {
         }
     }
 
+    public Print() {
+        for (let i = 0; i < this.objects.length; i++) {
+            this.objects[i].Print();
+        }
+    }
+
 }
 
 const e = new EventMaker();
