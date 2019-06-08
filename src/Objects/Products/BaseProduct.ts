@@ -1,5 +1,5 @@
 import BaseObject from '../../Sys/BaseObject';
-import SysMoment from '../../Sys/SysMoment';
+import Core from '../../Sys/Core';
 
 
 /**
@@ -21,14 +21,14 @@ export default class BaseProduct extends BaseObject {
      * @param item - основные поля из DB
      * @param date - дата создания
      */
-    constructor(date: SysMoment, item: any) {
-        super(date);
+    constructor(core: Core, item: any) {
+        super(core);
 
         this.id = item['id'];
         this.caption = item['caption'];
         this.basePrice = item['basePrice'];
         this.shelfLife = item['shelfLife'];
-        this.createAt = date.Now();
+        this.createAt = core.Now();
         this.isExpired = false;
 
     }
@@ -39,7 +39,7 @@ export default class BaseProduct extends BaseObject {
     public async Tick() {
 
         /* проверка просроченности */
-        if (this.date.Life() > this.shelfLife) {
+        if (this.core.Life() > this.shelfLife) {
             this.isExpired = true;            
             /* если продукт просрочен то его базовая стоимость = 0 */
             this.basePrice = 0;

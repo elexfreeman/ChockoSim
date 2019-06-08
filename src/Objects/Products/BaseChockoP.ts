@@ -1,5 +1,5 @@
 import BaseProduct from './BaseProduct';
-import SysMoment from '../../Sys/SysMoment';
+import Core from '../../Sys/Core';
 
 /**
  * Шоколадка
@@ -27,8 +27,8 @@ export default class BaseChockoP extends BaseProduct {
      * }
      * @param date 
      */
-    constructor(date: SysMoment, item: any) {
-        super(date, item);
+    constructor(core: Core, item: any) {
+        super(core, item);
 
         this.chockoBin = item['chockoBin'];
         this.milk = item['milk'];

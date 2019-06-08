@@ -1,5 +1,5 @@
 import BaseObject from '../../Sys/BaseObject';
-import SysMoment from '../../Sys/SysMoment';
+import Core from '../../Sys/Core';
 
 /**
  * Упаковка
@@ -13,8 +13,8 @@ export default class BasePackage extends BaseObject {
      * @param date 
      * @param price - стоимост упаковки
      */
-    constructor(date: SysMoment, price: number) {
-        super(date);
+    constructor(core: Core, price: number) {
+        super(core);
         this.price = price;   
     }    
 

@@ -1,17 +1,20 @@
 import * as moment from 'moment';
-
+import EventMaker from './EventMaker';
 
 /**
- * Счетчик времени
+ * Ядро системы
  */
-export default class SysMoment {
+export default class Core {
 
     public date: any;
     public startAt: string;
 
+    public event: EventMaker;
+
     constructor() {
         this.date = moment();
         this.startAt = this.Now();
+        this.event = new EventMaker();
     }
 
     /**
@@ -19,6 +22,7 @@ export default class SysMoment {
      */
     public Tick() {
         this.date.add(1, 'hours');
+        this.event.Tick();
     }
 
     /**

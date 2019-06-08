@@ -1,4 +1,4 @@
-import SysMoment from './SysMoment';
+import Core from './Core';
 import EventMaker from './EventMaker';
 
 /**
@@ -6,15 +6,15 @@ import EventMaker from './EventMaker';
  */
 export default class BaseObject {
     
-    public date: SysMoment;
+    public core: Core;
 
     public isDeleted: boolean; //флаг удаления
 
-    constructor(date: SysMoment) {
+    constructor(core: Core) {
         this.isDeleted = false;
-        this.date = date;
+        this.core = core;
         /* добавляем себя в общий пул объектов */
-        EventMaker.Add(this);
+        this.core.event.Add(this);
     }
 
     /**
@@ -27,6 +27,5 @@ export default class BaseObject {
     public Print() {
         
     }
-
 
 }

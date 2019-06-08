@@ -3,7 +3,7 @@ import BaseObject from './BaseObject';
 /**
  * события объектов
  */
-class EventMaker {
+export default class EventMaker {
 
     /* массив обрабатываемых объектов */
     private objects: BaseObject[] = [];
@@ -43,5 +43,3 @@ class EventMaker {
 
 }
 
-const e = new EventMaker();
-export default e; 

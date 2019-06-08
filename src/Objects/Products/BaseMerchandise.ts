@@ -1,7 +1,7 @@
 import BaseObject from '../../Sys/BaseObject';
 import BaseProduct from './BaseProduct';
 import BasePackage from './BasePackage';
-import SysMoment from '../../Sys/SysMoment';
+import Core from '../../Sys/Core';
 
 /**
  * Товар
@@ -20,8 +20,8 @@ export class BaseMerchandise extends BaseObject {
      * @param addPrice - надбавочная стоимость
      * @param packagePrice - стоимость упаковки
      */
-    constructor(date: SysMoment, product: BaseProduct, addPrice: number) {
-        super(date);
+    constructor(core: Core, product: BaseProduct, addPrice: number) {
+        super(core);
         this.product = product;
         this.addPrice = addPrice;
     }
