@@ -54,6 +54,25 @@ export default class BaseStore extends BaseObject {
         return this.store[index];
     }
 
+
+    /**
+     * Взять объект со склада
+     * @param caption - название объекта
+     */
+    public Take(caption: string): BaseObject {
+        let resp: BaseObject;
+
+        for (let i = 0; i < this.store.length; i++) {
+            if (this.store[i].caption == caption) {
+                resp = this.store[i];
+                this.Remove(i);
+                break;
+            }
+        }
+        return resp;
+    }
+
+    
     public Print() {
         console.log(">> STORE <<");
         console.log("Capacity: ", this.сapacity);

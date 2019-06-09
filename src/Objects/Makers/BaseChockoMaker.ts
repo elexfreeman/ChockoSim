@@ -4,9 +4,9 @@ import BaseChockoP from '../Products/BaseChockoP';
 
 
 /**
- * Сборщик шоколада
+ * Базовый сборщик шоколада
  */
-export default class ChockoMaker extends BaseMaker {
+export default class BaseChockoMaker extends BaseMaker {
 
     public result: BaseChockoP[]; 
     

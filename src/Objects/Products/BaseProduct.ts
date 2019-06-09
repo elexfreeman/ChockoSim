@@ -9,7 +9,7 @@ export default class BaseProduct extends BaseObject {
 
     /* Основние свойства продукта */
     public id?: number;
-    public caption: number; // название   
+   
     public basePrice: number; // себестоимость
     public shelfLife: number; //срок годности в днях
     public createAt: string; // дата производства

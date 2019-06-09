@@ -10,6 +10,8 @@ export default class BaseObject {
 
     public isDeleted: boolean; //флаг удаления
 
+    public caption: string; // название   
+
     constructor(core: Core) {
         this.isDeleted = false;
         this.core = core;
