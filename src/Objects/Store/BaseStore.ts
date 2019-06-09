@@ -72,7 +72,9 @@ export default class BaseStore extends BaseObject {
         return resp;
     }
 
-    
+    /**
+     * Печать в консоль
+     */
     public Print() {
         console.log(">> STORE <<");
         console.log("Capacity: ", this.сapacity);
@@ -82,6 +84,19 @@ export default class BaseStore extends BaseObject {
 
         for (let i = 0; i < this.store.length; i++) {
             this.store[i].Print();
+        }
+    }
+
+
+    /**
+     * удаляем пустые объекты
+     */
+    public async Tick() {
+        await super.Tick();
+        for (let i = 0; i < this.store.length; i++) {
+            if (!this.store[i]) {
+                this.Remove(i);
+            }
         }
     }
 

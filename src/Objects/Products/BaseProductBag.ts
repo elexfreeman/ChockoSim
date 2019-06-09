@@ -34,10 +34,10 @@ export default class BaseProductBag extends BaseProduct {
         }
 
         /* вычитаем кол-во */
-        this.amount = this.amount-amount;
+        this.amount = this.amount - amount;
 
         /* если кол-во = 0 удаляем мешок */
-        if(this.amount==0) {
+        if (this.amount == 0) {
             this.isDeleted = true;
         }
 

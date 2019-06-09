@@ -14,7 +14,7 @@ export default class BaseProduct extends BaseObject {
     public shelfLife: number; //срок годности в днях
     public createAt: string; // дата производства
     public isExpired: boolean; // продукт просрочен
-
+    public massa: number; // масса
 
     /**
      * 
@@ -30,6 +30,7 @@ export default class BaseProduct extends BaseObject {
         this.shelfLife = item['shelfLife'];
         this.createAt = core.Now();
         this.isExpired = false;
+        this.massa = item['massa'];
 
     }
 
