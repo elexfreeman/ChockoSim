@@ -52,10 +52,10 @@ let sugar = {
 async function run() {
 
     /* описание теста */
-    describe('Тест maker', () => {
+    describe('Тест store', () => {
+
        
-       
-        it('Создаем продукт из ингредиентов', async () => {
+        it('Заполняем склад', async () => {
             /* Ядро системы */
             let core = new Core();
 
@@ -66,15 +66,57 @@ async function run() {
 
             let store = new BaseStore(core, 10);
 
+            /* добавляем товары на склад */
             store.Add(testP1);
             store.Add(testP2);
             store.Add(pSugar);
 
             /* вызыв общих тиков */
             core.Tick();
-            assert(true);
+
+            /* получаем ссылки на товары со склада */
+            let p0 = <BaseProduct>store.Get(0);
+            let p1 = <BaseProduct>store.Get(1);
+            
+            /* проверям полученыые товары */
+            assert(p0.id == 1);
+            assert(p1.id == 2);
 
         }); //it ****
+
+       
+        it('Проверка просроченности продукта на складе', async () => {
+            /* Ядро системы */
+            let core = new Core();
+
+            let testP1 = new BaseProduct(core, product1);
+            let testP2 = new BaseProduct(core, product2);
+
+            let store = new BaseStore(core, 10);
+
+            /* добавляем товары на склад */
+            store.Add(testP1);
+            store.Add(testP2);            
+
+            /* вызыв общих тиков */
+            core.Tick();
+            core.Tick();
+            core.Tick();
+            core.Tick();
+
+            /* получаем ссылки на товары со склада */
+            let p0 = <BaseProduct>store.Get(0);
+            let p1 = <BaseProduct>store.Get(1);
+            
+            assert(p0.id == 1);
+            assert(p1.id == 2);         
+
+            /* проверяем просроченность */
+            assert(!p0.isExpired);
+            assert(!p1.isExpired);
+
+        }); //it ****
+       
 
     });
 

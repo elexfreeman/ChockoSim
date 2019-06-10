@@ -5,7 +5,8 @@
   "main": "main.ts",
   "scripts": {
     "start": "ts-node ./src/main.ts",
-    "test": "ts-mocha"
+    "test": "ts-mocha",
+    "test-all": "ts-mocha tests/*"
   },
   "repository": {
     "type": "git",
