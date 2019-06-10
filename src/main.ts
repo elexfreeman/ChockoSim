@@ -8,7 +8,7 @@ import BaseStore from './Objects/Store/BaseStore';
 
 let tick;
 
-/* счетчик времени */
+/* Ядро системы */
 const core = new Core();
 
 let product1 = {
@@ -64,4 +64,3 @@ tick = setInterval(async () => {
 
     
 }, 1000); 
-
