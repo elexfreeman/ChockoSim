@@ -3,13 +3,14 @@ import Core from '../../Sys/Core';
 import { BaseChockoP, ChockoItemI } from '../Products/BaseChockoP';
 
 import BaseProductBag from "../Products/BaseProductBag";
+import BaseStore from "../Store/BaseStore";
 
 /**
  * Ингредиенты
  */
 export interface IngredientsI {
-    amount: number;
-    item: BaseProductBag;
+    caption: string; // название
+    amount: number; // количество   
 }
 
 
@@ -19,9 +20,14 @@ export interface IngredientsI {
  */
 export class BaseChockoMaker extends BaseMaker {
 
+    /* отдаваемый результат */
     public _result: BaseChockoP[] = [];
 
+    /* ингредиенты */
     public ingredients: IngredientsI[];
+
+    /* склады */
+    public store: BaseStore[];
 
     /**
     * 
@@ -31,6 +37,14 @@ export class BaseChockoMaker extends BaseMaker {
     */
     constructor(core: Core, count: number, time: number) {
         super(core, count, time);
+    }
+
+    /**
+     * Добавляет доступный для работы склад
+     * @param store - склад
+     */
+    public addStore(store: BaseStore) {
+        this.store.push(store);
     }
 
     /**

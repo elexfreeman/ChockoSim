@@ -24,14 +24,12 @@ export default class BaseProductBag extends BaseProduct {
      * Взять кол-во
      * @param amount - кол-во
      */
-    public Take(amount: number): boolean {
-        let resp = false;
+    public Take(amount: number): number {
+        let resp = 0;
 
         if (this.amount - amount >= 0) {
-            resp = true;
-        } else {
-            resp = false;
-        }
+            resp = amount;
+        } 
 
         /* вычитаем кол-во */
         this.amount = this.amount - amount;
@@ -41,6 +39,15 @@ export default class BaseProductBag extends BaseProduct {
             this.isDeleted = true;
         }
 
+        return resp;
+    }
+
+    /**
+     * Взять все
+     */
+    public TakeAll(): number {
+        let resp = this.amount;
+        this.amount = 0;
         return resp;
     }
 

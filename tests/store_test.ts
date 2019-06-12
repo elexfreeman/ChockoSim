@@ -17,35 +17,10 @@ const expect = require('chai').expect;
 
 import Core from '../src/Sys/Core';
 
-import BaseProduct from '../src/Objects/Products/BaseProduct' ;
-import BaseProductBag from '../src/Objects/Products/BaseProductBag' ;
-
+import BaseProduct from '../src/Objects/Products/BaseProduct';
+import BaseProductBag from '../src/Objects/Products/BaseProductBag';
 import BaseStore from '../src/Objects/Store/BaseStore';
-
-
-
-
-let product1 = {
-    id : 1,
-    caption : 'Новый продукт 1',
-    basePrice : 250,
-    shelfLife : 4
-}
-
-let product2 = {
-    id : 2,
-    caption : 'Новый продукт 2',
-    basePrice : 300,
-    shelfLife : 4
-}
-
-let sugar = {
-    id : 1,
-    caption : 'Мешок сахара',
-    basePrice : 300,
-    shelfLife : 4000,
-    amount: 10
-}
+import { sugar, product1, product2, milk } from './test_data';
 
 
 /* запускатор теста для async-await */
@@ -54,7 +29,7 @@ async function run() {
     /* описание теста */
     describe('Тест store', () => {
 
-       
+
         it('Заполняем склад', async () => {
             /* Ядро системы */
             let core = new Core();
@@ -77,14 +52,14 @@ async function run() {
             /* получаем ссылки на товары со склада */
             let p0 = <BaseProduct>store.Get(0);
             let p1 = <BaseProduct>store.Get(1);
-            
+
             /* проверям полученыые товары */
             assert(p0.id == 1);
             assert(p1.id == 2);
 
         }); //it ****
 
-       
+
         it('Проверка просроченности продукта на складе', async () => {
             /* Ядро системы */
             let core = new Core();
@@ -96,7 +71,7 @@ async function run() {
 
             /* добавляем товары на склад */
             store.Add(testP1);
-            store.Add(testP2);            
+            store.Add(testP2);
 
             /* вызыв общих тиков */
             core.Tick();
@@ -107,16 +82,40 @@ async function run() {
             /* получаем ссылки на товары со склада */
             let p0 = <BaseProduct>store.Get(0);
             let p1 = <BaseProduct>store.Get(1);
-            
+
             assert(p0.id == 1);
-            assert(p1.id == 2);         
+            assert(p1.id == 2);
 
             /* проверяем просроченность */
             assert(!p0.isExpired);
             assert(!p1.isExpired);
 
         }); //it ****
-       
+
+
+
+        it('Получить продукт со склада', async () => {
+            /* Ядро системы */
+            let core = new Core();
+
+            let store = new BaseStore(core, 10);
+
+            /* добавляем товары на склад */
+            store.Add(new BaseProduct(core, product1));
+            store.Add(new BaseProduct(core, product2));
+            store.Add(new BaseProductBag(core, sugar));
+            store.Add(new BaseProductBag(core, sugar));
+
+            assert(store.store.length == 4);
+
+            let iSugar = <BaseProductBag>store.Take('Мешок сахара');
+
+            /* проверям полученыые товары */
+            assert(iSugar.caption == 'Мешок сахара');
+            assert(store.store.length == 3);
+
+        }); //it ****
+
 
     });
 
