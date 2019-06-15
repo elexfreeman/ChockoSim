@@ -97,11 +97,9 @@ async function run() {
             assert(baseChockoMaker.result.length == 0);
 
             /* ждем */
-            for (let i = 0; i <= 4; i++) {
-                core.Tick();                
-            }
-
-            console.log(baseChockoMaker.result);
+            for (let i = 0; i <= 5; i++) {
+                await core.Tick();
+            }         
 
             assert(baseChockoMaker.result.length > 0);
 

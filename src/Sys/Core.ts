@@ -20,9 +20,9 @@ export default class Core {
     /**
      * увеличивается дата
      */
-    public Tick() {
+    public async Tick() {
         this.date.add(1, 'hours');
-        this.event.Tick();
+        await this.event.Tick();
     }
 
     /**
