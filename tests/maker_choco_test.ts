@@ -43,6 +43,8 @@ async function run() {
             let baseChockoMaker: BaseChockoMaker
             let store: BaseStore;
 
+            const makeTime = 2;
+
             core = new Core();
             /* заполняем склад */
             store = new BaseStore(core, 10);
@@ -52,7 +54,7 @@ async function run() {
             store.Add(new BaseProductBag(core, cacao));
             //assert(store.store.length == 3);
 
-            baseChockoMaker = new BaseChockoMaker(core, 10, 10);
+            baseChockoMaker = new BaseChockoMaker(core, 10, makeTime);
 
             baseChockoMaker.addStore(store);
 
@@ -83,15 +85,26 @@ async function run() {
                     cacaoOilI, sugarI, cacaoI
                 ],
                 shelfLife: 10
-            };           
+            };
 
             /* == собираем шоколадку == */
             let ok = baseChockoMaker.Make(ingredient);
-            
+
             assert(!baseChockoMaker.errors.emptyStore);
             assert(!baseChockoMaker.errors.ingredientAmount);
             assert(ok);
-         
+
+            assert(baseChockoMaker.result.length == 0);
+
+            /* ждем */
+            for (let i = 0; i <= 4; i++) {
+                core.Tick();                
+            }
+
+            console.log(baseChockoMaker.result);
+
+            assert(baseChockoMaker.result.length > 0);
+
         }); //it ****
 
     });

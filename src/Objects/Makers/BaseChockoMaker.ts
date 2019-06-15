@@ -127,7 +127,7 @@ export class BaseChockoMaker extends BaseMaker {
     /**
      * результат сборки
      */
-    get result() {
+    get result() {       
         if (this.isDone()) {
             return this._result;
         } else {
@@ -150,6 +150,10 @@ export class BaseChockoMaker extends BaseMaker {
      * Обработка цикла производства
      */
     public async Tick() {
+        console.log('tik');
+        console.log('this.timeCounter',this.timeCounter);
+        console.log('this.time',this.time);
+        console.log('this.status',this.status);
         /* если мы работаетм */
         if (this.isAtWork()) {
             this.timeCounter++;

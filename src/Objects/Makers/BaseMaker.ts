@@ -1,10 +1,11 @@
 import Core from '../../Sys/Core';
+import BaseObject from '../../Sys/BaseObject';
 
 /**
  * Базовый сборщик
  * на выходе массив собранных объектов
  */
-export default class BaseMaker {
+export default class BaseMaker extends BaseObject {
 
     public core: Core;
 
@@ -24,6 +25,7 @@ export default class BaseMaker {
      * @param time - время на
      */
     constructor(core: Core, count: number, time: number) {
+        super(core);
         this.core = core;
         this.count = count;
         this.time = time;
