@@ -1,47 +1,36 @@
 import BaseProduct from './BaseProduct';
 import Core from '../../Sys/Core';
 
+/**
+ * Ингредиенты
+ */
+export interface IngredientsI {
+    caption: string; // название
+    amount: number; // количество   
+}
 
 /**
  * Описание продукта
  */
 export interface ChockoItemI {
-    id: number;
-    caption: string;
-    basePrice: number;
-    shelfLife: number;
-    chockoBin: number;
-    milk: number;
-    dye: string[];
-    filler: string[];
-    massa: number;
-    isExpired: number;
-    sugar: number;
+    id?: number;
+    caption: string; // название    
+    shelfLife: number; // срок годности
+    massa: number; // масса
+    basePrice?: number; // цена
+    ingredientsI: IngredientsI[];
 }
 
 /**
  * Шоколадка
  */
 export class BaseChockoP extends BaseProduct {
-
-    public chockoBin: number; // процент содержания какао
-    public milk: number; // процент содержания молока
-    public cocoaOil: number; // процент содержания какао масла
-    public sugar: number; // процент содержания сахара
-    public dye: string[]; // красители
-    public filler: string[]; // наполнитель
    
-
+    ingredientsI: IngredientsI[];
    
     constructor(core: Core, item: ChockoItemI) {
         super(core, item);
-
-        this.chockoBin = item['chockoBin'];
-        this.milk = item['milk'];
-        this.sugar = item['sugar'];
-        this.dye = item['dye'];
-        this.filler = item['filler'];
-        
+        this.ingredientsI = item.ingredientsI;        
     }
 
     public async Tick() {
@@ -53,8 +42,7 @@ export class BaseChockoP extends BaseProduct {
      */
     public Print() {
         super.Print();
-        console.log('chockoBin: ', this.chockoBin);
-        console.log('milk: ', this.milk);
+        console.log('ingredientsI: ', this.ingredientsI);      
     }
 
 

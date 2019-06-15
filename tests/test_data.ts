@@ -15,7 +15,8 @@ export const product2 = {
 
 export const sugar = {
     id: 3,
-    caption: 'Мешок сахара',
+    caption: 'Сахар',
+    description: 'Мешок сахара',
     basePrice: 300,
     shelfLife: 4000,
     amount: 100
@@ -23,7 +24,8 @@ export const sugar = {
 
 export const milk = {
     id: 4,
-    caption: 'Мешок сухого молока',
+    caption: 'Сухое молоко',
+    description: 'Мешок сухого молока',
     basePrice: 300,
     shelfLife: 4000,
     amount: 100
@@ -32,6 +34,16 @@ export const milk = {
 export const cacaoOil = {
     id: 5,
     caption: 'Какао масло',
+    description: 'Какао масло',
+    basePrice: 300,
+    shelfLife: 4000,
+    amount: 100
+}
+
+export const cacao = {
+    id: 5,
+    caption: 'Какао',
+    description: 'Какао',
     basePrice: 300,
     shelfLife: 4000,
     amount: 100
