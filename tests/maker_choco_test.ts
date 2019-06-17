@@ -47,7 +47,7 @@ async function run() {
 
             core = new Core();
             /* заполняем склад */
-            store = new BaseStore(core, 10);
+            store = new BaseStore(core, 20);
             store.Add(new BaseProductBag(core, sugar));
             store.Add(new BaseProductBag(core, milk));
             store.Add(new BaseProductBag(core, cacaoOil));
@@ -88,10 +88,11 @@ async function run() {
             };
 
             /* == собираем шоколадку == */
-            let ok = baseChockoMaker.Make(ingredient);
+            let ok = baseChockoMaker.Make(ingredient);          
 
-            assert(!baseChockoMaker.errors.emptyStore);
-            assert(!baseChockoMaker.errors.ingredientAmount);
+            assert(!baseChockoMaker.errorSys.getErrors().ingredientAmount);
+            assert(!baseChockoMaker.errorSys.getErrors().emptyStore);
+            
             assert(ok);
 
             assert(baseChockoMaker.result.length == 0);
@@ -102,6 +103,20 @@ async function run() {
             }         
 
             assert(baseChockoMaker.result.length > 0);
+           
+            /* складываем на склад наши шоколадки */
+            
+            store.AddMore(baseChockoMaker.result);
+            assert(!store.errorSys.getErrors().store_full);
+            assert(!store.errorSys.getErrors().empty_arg);
+            assert(!store.errorSys.getErrors().objects_to_match);
+
+            console.log(store.store.length);
+            
+
+        
+
+            
 
         }); //it ****
 

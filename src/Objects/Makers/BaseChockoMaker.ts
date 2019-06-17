@@ -34,14 +34,8 @@ export class BaseChockoMaker extends BaseMaker {
     constructor(core: Core, count: number, time: number) {
         super(core, count, time);
         this.ingredients = [];
-        this.clearErrors();
-    }
-
-    public clearErrors() {
-        this.errors = {
-            emptyStore: false,
-            ingredientAmount: false
-        }
+        this.errorSys.decl('emptyStore', 'Склад заполнен');
+        this.errorSys.decl('ingredientAmount', 'Нехватает ингредиентов');
     }
 
     /**
@@ -67,14 +61,12 @@ export class BaseChockoMaker extends BaseMaker {
      * @param count - кол-во     
      * @param item  - рецепт шоколадки   
      */
-    public Make(item: ChockoItemI): boolean {
-
-        let ok: boolean = false;
-
-        this.clearErrors();
+    public Make(item: ChockoItemI): boolean {      
+        
+        this.errorSys.clear();
 
         if (this.isFree) {
-            ok = true;
+           
             this.setStatusAtWork();
             item.basePrice = 0;
 
@@ -84,35 +76,34 @@ export class BaseChockoMaker extends BaseMaker {
                 /* берем со склада ингредиент */
                 let ingredient = <BaseProductBag>this.store.Take(this.ingredients[i].caption);
                 
-                if (!ingredient) {
-                    ok = false;
-                    this.errors.emptyStore = true;
+                if (!ingredient) {                   
+                    this.errorSys.setError('emptyStore');                    
                 }
 
                 /* отсыпаем по рецепту кол-во */
-                if (ok) {
+                if (this.errorSys.isOk()) {
                     let amount = ingredient.Take(this.ingredients[i].amount);
-                    if (amount == 0) {
-                        ok = false;
-                        this.errors.ingredientAmount = true;
+                    if (amount == 0) {                       
+                        this.errorSys.setError('ingredientAmount');                           
                     }
                     /* высчитаываем базовую стоимость на основе цены ингредиентов */
                     item.basePrice += ingredient.basePrice * amount;
                 }
 
                 /* если все норм возвращаем на склад ингредиент */
-                if (ok) {
+                if (this.errorSys.isOk()) {
+                    /* тут может стор быть заполнен уже */
                     this.store.Add(ingredient);
                 }
 
                 /* если все плохо прерываем готовку */
-                if (!ok) {
+                if (!this.errorSys.isOk()) {
                     break;
                 }
 
             }
 
-            if (ok) {
+            if (this.errorSys.isOk()) {
                 /* собираем результат */
                 for (let i = 0; i < this.count; i++) {
                     this._result.push(new BaseChockoP(this.core, item));
@@ -121,15 +112,13 @@ export class BaseChockoMaker extends BaseMaker {
 
         }
 
-        return ok;
+        return this.errorSys.isOk();
     }
 
     /**
      * результат сборки
      */
-    get result() {   
-        console.log(this.status)    ;
-        console.log(this.isDone())    ;
+    get result() {           
         if (this.isDone()) {
             return this._result;
         } else {

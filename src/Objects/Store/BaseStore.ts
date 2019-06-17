@@ -19,6 +19,10 @@ export default class BaseStore extends BaseObject {
     constructor(core: Core, сapacity: number = 0) {
         super(core);
         this.сapacity = сapacity;
+
+        this.errorSys.decl('store_full', 'Склад заполнен');
+        this.errorSys.decl('empty_arg', 'Пустой массив входных объектов');
+        this.errorSys.decl('objects_to_match', 'Слишко много объектов');
     }
 
     /**
@@ -26,13 +30,43 @@ export default class BaseStore extends BaseObject {
      * @param object 
      */
     public Add(object: BaseObject): boolean {
+        this.errorSys.clear();
         /* если места нету возвращаем false */
         if (this.store.length == this.сapacity) {
+            this.errorSys.setError('store_full');
             return false;
         }
         this.store.push(object);
         return true;
     }
+
+    /**
+     * Добавляет много объектов на склад
+     * @param objects 
+     */
+    public AddMore(objects: BaseObject[]): boolean {
+        this.errorSys.clear();
+        /* если места нету возвращаем false */
+        if (this.store.length == this.сapacity) {
+            this.errorSys.setError('store_full');
+            return false;
+        }
+
+        if (!objects) {
+            this.errorSys.setError('empty_arg');
+            return false;
+        }
+
+        if ((this.store.length + objects.length) > this.сapacity) {
+            this.errorSys.setError('objects_to_match');
+            return false;
+        }
+
+        this.store = this.store.concat(objects);
+
+        return true;
+    }
+
 
     /**
      * Удалить объект из хранилище
