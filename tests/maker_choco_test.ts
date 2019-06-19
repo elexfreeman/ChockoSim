@@ -112,11 +112,6 @@ async function run() {
             assert(!store.errorSys.getErrors().objects_to_match);
 
             console.log(store.store.length);
-            
-
-        
-
-            
 
         }); //it ****
 
