@@ -6,7 +6,7 @@ import ErrorSys from './ErrorSys';
  */
 export default class BaseObject {
     
-    public core: Core;
+    protected core: Core;
 
     public isDeleted: boolean; //флаг удаления
 

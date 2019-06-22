@@ -8,7 +8,7 @@ import Core from '../../Sys/Core';
  */
 export class BaseMerchandise extends BaseObject {
 
-    public product: BaseProduct;
+    public products: BaseProduct[];
     public package: BasePackage;
 
     public addPrice: number; // надбавка в % на основную стоимость товара
@@ -20,17 +20,26 @@ export class BaseMerchandise extends BaseObject {
      * @param addPrice - надбавочная стоимость
      * @param packagePrice - стоимость упаковки
      */
-    constructor(core: Core, product: BaseProduct, addPrice: number) {
+    constructor(core: Core, cPackage: BasePackage, products: BaseProduct[], addPrice: number) {
         super(core);
-        this.product = product;
+        this.products = products;
         this.addPrice = addPrice;
+        this.package = cPackage;
     }
 
     /**
      * стоимость товара
      */
     get price() {
-        return Math.round(this.product.basePrice + ((this.product.basePrice * this.addPrice) / 100)) - this.package.price;;
+        let res = 0;
+
+        for (let i = 0; i < this.products.length; i++) {
+            res += this.products[i].basePrice;
+        }
+
+        res = res + Math.round(res * this.addPrice) / 100 + this.package.price;
+
+        return res;
     }
 
 }

@@ -12,7 +12,7 @@ import BaseStore from "../Store/BaseStore";
 export class BaseChockoMaker extends BaseMaker {
 
     /* отдаваемый результат */
-    public _result: BaseChockoP[] = [];
+    protected _result: BaseChockoP[] = [];
 
     /* ингредиенты */
     public ingredients: IngredientsI[];

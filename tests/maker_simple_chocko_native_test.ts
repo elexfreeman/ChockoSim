@@ -46,8 +46,8 @@ async function run() {
 
             /* берем ингредиенты со склада */
 
-            let iSugar = <BaseProductBag>store.Take('Мешок сахара');
-            let iMilk = <BaseProductBag>store.Take('Мешок сухого молока');
+            let iSugar = <BaseProductBag>store.Take('Сахар');
+            let iMilk = <BaseProductBag>store.Take('Сухое молоко');
             let iCacaoOil = <BaseProductBag>store.Take('Какао масло');
 
             assert(iSugar);

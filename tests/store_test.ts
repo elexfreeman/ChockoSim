@@ -108,10 +108,10 @@ async function run() {
 
             assert(store.store.length == 4);
 
-            let iSugar = <BaseProductBag>store.Take('Мешок сахара');
+            let iSugar = <BaseProductBag>store.Take('Сахар');
 
             /* проверям полученыые товары */
-            assert(iSugar.caption == 'Мешок сахара');
+            assert(iSugar.caption == 'Сахар');
             assert(store.store.length == 3);
 
         }); //it ****

@@ -5,18 +5,16 @@ import BaseObject from '../../Sys/BaseObject';
  * Базовый сборщик
  * на выходе массив собранных объектов
  */
-export default class BaseMaker extends BaseObject {
+export default class BaseMaker extends BaseObject {   
 
-    public core: Core;
-
-    public _result: any[] = []; // возвращаемы результат
+    protected _result: any[] = []; // возвращаемы результат
 
     public count: number; // кол-вл собираемых объектов
 
     public time: number; // затрачиваемое время на производство
-    public timeCounter: number; // счетчик времени производства
+    protected timeCounter: number; // счетчик времени производства
 
-    public status: number = 0;
+    protected status: number = 0;
 
     /**
      * 
