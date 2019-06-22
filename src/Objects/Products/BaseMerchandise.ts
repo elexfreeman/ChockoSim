@@ -13,6 +13,7 @@ export class BaseMerchandise extends BaseObject {
 
     public addPrice: number; // надбавка в % на основную стоимость товара
 
+    public isExpired: boolean; // продукт просрочен
 
     /**
      * 
@@ -25,6 +26,7 @@ export class BaseMerchandise extends BaseObject {
         this.products = products;
         this.addPrice = addPrice;
         this.package = cPackage;
+        this.isExpired = false;
     }
 
     /**
@@ -34,10 +36,20 @@ export class BaseMerchandise extends BaseObject {
         let res = 0;
 
         for (let i = 0; i < this.products.length; i++) {
-            res += this.products[i].basePrice;
+            /* продукт внутри просрочен */
+            if (this.products[i].isExpired) {
+                this.isExpired = true;
+                break;
+            } else {
+                res += this.products[i].basePrice;
+            }
         }
 
-        res = res + Math.round(res * this.addPrice) / 100 + this.package.price;
+        /* продукт не просрочен */
+        if (!this.isExpired) {
+            res = res + Math.round(res * this.addPrice) / 100 + this.package.price;
+        }
+
 
         return res;
     }
