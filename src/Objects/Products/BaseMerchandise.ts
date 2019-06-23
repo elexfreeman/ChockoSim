@@ -4,6 +4,16 @@ import BasePackage from './BasePackage';
 import Core from '../../Sys/Core';
 
 /**
+ * упаковка продукт описание
+ */
+export interface CompositionI {
+    caption: string;
+    products: string[];
+    addPrice: number;
+    pac: string[];
+}
+
+/**
  * Товар
  */
 export class BaseMerchandise extends BaseObject {

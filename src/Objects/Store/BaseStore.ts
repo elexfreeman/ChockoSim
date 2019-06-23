@@ -10,7 +10,7 @@ export default class BaseStore extends BaseObject {
     public store: BaseObject[] = [];
 
     /* вместимость */
-    public сapacity: number;    
+    public сapacity: number;
 
     /**     
      * @param date  - время
@@ -48,15 +48,15 @@ export default class BaseStore extends BaseObject {
         this.errorSys.clear();
         /* если места нету возвращаем false */
         if (this.store.length == this.сapacity) {
-            this.errorSys.setError('store_full');           
+            this.errorSys.setError('store_full');
         }
 
         if (!objects) {
-            this.errorSys.setError('empty_arg');           
+            this.errorSys.setError('empty_arg');
         }
 
         if ((this.store.length + objects.length) > this.сapacity) {
-            this.errorSys.setError('objects_to_match');           
+            this.errorSys.setError('objects_to_match');
         }
 
         this.store = this.store.concat(objects);
@@ -101,6 +101,22 @@ export default class BaseStore extends BaseObject {
             }
         }
         return resp;
+    }
+
+    /**
+     * сколько позиций на складе
+     * @param caption 
+     */
+    public GetAmount(caption: string): number {
+        let res = 0;
+
+        for (let i = 0; i < this.store.length; i++) {
+            if (this.store[i].caption = caption) {
+                res++;
+            }
+        }
+
+        return res;
     }
 
     /**
