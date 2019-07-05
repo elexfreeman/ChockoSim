@@ -1,4 +1,4 @@
-import FinchBase from '../../Sys/FinchBase';
+import FinchBaseList from '../../Sys/FinchBaseList';
 import Delivery from '../Delivery/Delivery';
 import User from './User';
 
@@ -6,7 +6,7 @@ import User from './User';
 /**
  * Список доставок пользователя
  */
-export default class UserDelivery extends FinchBase {
+export default class UserDeliveryList extends FinchBaseList {
 
     private user: User;
 
@@ -16,6 +16,9 @@ export default class UserDelivery extends FinchBase {
         this.user = user;
     }
 
+    /**
+     * Список доставок пользователя
+     */
     async list(): Promise<Delivery[]> {
 
         let res: Delivery[];

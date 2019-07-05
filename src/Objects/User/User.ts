@@ -1,6 +1,6 @@
 import FinchBase from '../../Sys/FinchBase';
 import Delivery from '../Delivery/Delivery';
-import UserDelivery from './UserDelivery';
+import UserDeliveryList from './UserDeliveryList';
 
 
 /**
@@ -15,12 +15,12 @@ export default class User extends FinchBase {
 
     public delivery: Delivery[] = []; // список доставок пользователя
 
-    protected userDelivery: UserDelivery; // конструктор доставок пользователя
+    protected userDelivery: UserDeliveryList; // конструктор доставок пользователя
 
     constructor() {
         super();
 
-        this.userDelivery = new UserDelivery(this);
+        this.userDelivery = new UserDeliveryList(this);
     }
 
 
