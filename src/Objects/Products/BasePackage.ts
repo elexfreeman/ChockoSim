@@ -7,7 +7,7 @@ import Core from '../../Sys/Core';
 export default class BasePackage extends BaseObject {
 
     public price: number;
-  
+
     /**
      * 
      * @param date 
@@ -15,7 +15,7 @@ export default class BasePackage extends BaseObject {
      */
     constructor(core: Core, price: number) {
         super(core);
-        this.price = price;   
-    }    
+        this.price = price;
+    }
 
 }

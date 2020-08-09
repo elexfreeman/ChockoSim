@@ -18,7 +18,7 @@ export interface CompositionI {
  */
 export class BaseMerchandise extends BaseObject {
 
-    public products: BaseProduct[];
+    public aProduct: BaseProduct[];
     public package: BasePackage;
 
     public addPrice: number; // надбавка в % на основную стоимость товара
@@ -33,35 +33,21 @@ export class BaseMerchandise extends BaseObject {
      */
     constructor(core: Core, cPackage: BasePackage, products: BaseProduct[], addPrice: number) {
         super(core);
-        this.products = products;
+        this.aProduct = products;
         this.addPrice = addPrice;
         this.package = cPackage;
         this.isExpired = false;
     }
 
-    /**
-     * стоимость товара
-     */
-    get price() {
-        let res = 0;
+    fGetPrice(): number {
+        let nPrice: number = 0;
 
-        for (let i = 0; i < this.products.length; i++) {
-            /* продукт внутри просрочен */
-            if (this.products[i].isExpired) {
-                this.isExpired = true;
-                break;
-            } else {
-                res += this.products[i].basePrice;
-            }
+        for (let i = 0; i < this.aProduct.length; i++) {
+            nPrice = nPrice + this.aProduct[i].fGetBasePrice();
         }
 
-        /* продукт не просрочен */
-        if (!this.isExpired) {
-            res = res + Math.round(res * this.addPrice) / 100 + this.package.price;
-        }
+        nPrice = nPrice + this.package.price;
+        return nPrice;
 
-
-        return res;
     }
-
 }

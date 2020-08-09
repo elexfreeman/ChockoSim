@@ -1,37 +1,29 @@
 import BaseObject from '../../Sys/BaseObject';
 import Core from '../../Sys/Core';
-
+import { IngredientsI, ProductIngredientI } from './IngredientsI';
+/**
+ * Описание продукта
+ */
+export interface ItemI {
+    id?: number;
+    caption: string; // название    
+    shelfLife: number; // срок годности
+    massa: number; // масса
+    basePrice?: number; // цена
+    ingredients: ProductIngredientI[];
+}
 
 /**
  * Базовый продукт
  */
 export default class BaseProduct extends BaseObject {
 
-    /* Основние свойства продукта */
-    public id?: number;
-   
-    public basePrice: number; // себестоимость
-    public shelfLife: number; //срок годности в днях
-    public createAt: string; // дата производства
-    public isExpired: boolean; // продукт просрочен
-    public massa: number; // масса
+    public data: ItemI;
+    public isExpired: boolean;
 
-    /**
-     * 
-     * @param item - основные поля из DB
-     * @param date - дата создания
-     */
-    constructor(core: Core, item: any) {
+    constructor(core: Core, data: ItemI) {
         super(core);
-
-        this.id = item['id'];
-        this.caption = item['caption'];
-        this.basePrice = item['basePrice'];
-        this.shelfLife = item['shelfLife'];
-        this.createAt = core.Now();
-        this.isExpired = false;
-        this.massa = item['massa'];
-
+        this.data = data;
     }
 
     /**
@@ -40,21 +32,34 @@ export default class BaseProduct extends BaseObject {
     public async Tick() {
 
         /* проверка просроченности */
-        if (this.core.Life() > this.shelfLife) {
-            this.isExpired = true;            
-            /* если продукт просрочен то его базовая стоимость = 0 */
-            this.basePrice = 0;
+        if (this.core.Life() > this.data.shelfLife) {
+            this.isExpired = true;
         }
     }
 
     public Print() {
-        console.log('id: ', this.id);
-        console.log('caption: ', this.caption);
-        console.log('basePrice: ', this.basePrice);
-        console.log('shelfLife: ', this.shelfLife);
-        console.log('createAt: ', this.createAt);
-        console.log('isExpired: ', this.isExpired);
+    }
+
+    fGetBasePrice(): number {
+        let nPrice = 0;
+
+        for (let i = 0; i < this.data.ingredients.length; i++) {
+            nPrice = nPrice + this.data.ingredients[i].amount * this.data.ingredients[i].ingredient.price;
+        }
+
+        return nPrice;
+
     }
 
 
+    fGetMassa(): number {
+        let nMassa = 0;
+
+        for (let i = 0; i < this.data.ingredients.length; i++) {
+            nMassa = nMassa + this.data.ingredients[i].amount
+        }
+
+        return nMassa;
+
+    }
 }

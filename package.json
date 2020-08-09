@@ -4,7 +4,7 @@
   "description": "Симулятор производства шоколада",
   "main": "main.ts",
   "scripts": {
-    "start": "ts-node ./src/main.ts",
+    "start": "ts-node ./src/trufelCalc.ts",
     "test": "ts-mocha",
     "test-all": "ts-mocha tests/*"
   },
