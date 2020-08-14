@@ -11,6 +11,7 @@ export const fGetTrufelVozd = (): ItemI => {
         ingredients: [
         ],
     }
+
     TrufelVodData.ingredients.push({
         ingredient: Ing.chockoDarck,
         amount: 130 / 39,

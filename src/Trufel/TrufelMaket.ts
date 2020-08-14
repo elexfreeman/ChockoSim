@@ -4,6 +4,7 @@ import Core from '../Sys/Core';
 import BaseProduct from '../Objects/Products/BaseProduct';
 import { fGetTrufelVozd } from './Trufels';
 import { ProductIngredientI } from '../Objects/Products/IngredientsI';
+import { TrufelVozd } from './TrufelVozd';
 
 export class TrufelMaker {
 
@@ -16,7 +17,7 @@ export class TrufelMaker {
             const pac = new BasePackage(core, 500);
             const aTrufel: BaseProduct[] = [];
             for (let i = 0; i < 9; i++) {
-                aTrufel.push(new BaseProduct(core, fGetTrufelVozd()))
+                aTrufel.push(new TrufelVozd(core));
             }
             this.aMerchant.push(new BaseMerchandise(core, pac, aTrufel, 10))
         }
@@ -54,9 +55,8 @@ export class TrufelMaker {
 
 
     public fGetIngredientsToralPrice() {
-
         let out: ProductIngredientI[] = this.fGetIngredients();
-
+        let totalAmout: number = 0;
         for (let i = 0; i < out.length; i++) {
             console.log(`
 Ингредиент: ${out[i].ingredient.caption}
@@ -65,7 +65,10 @@ export class TrufelMaker {
 Итого: ${(out[i].ingredient.price * out[i].amount).toFixed(2)}
             
             `);
+            totalAmout += out[i].amount;
         }
+        console.log('Общий все:', totalAmout);
     }
+
 
 }

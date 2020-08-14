@@ -21,9 +21,23 @@ export default class BaseProduct extends BaseObject {
     public data: ItemI;
     public isExpired: boolean;
 
-    constructor(core: Core, data: ItemI) {
+    constructor(core: Core) {
         super(core);
-        this.data = data;
+        this.data = {
+            caption : '',
+            shelfLife: 10000,
+            massa: 0,
+            ingredients: [],
+
+        }
+    }
+
+    protected fSetCaption(sCaption: string) {
+        this.data.caption = sCaption;
+    }
+
+    protected fAddIngredient(ingr: ProductIngredientI) {
+        this.data.ingredients.push(ingr);
     }
 
     /**
