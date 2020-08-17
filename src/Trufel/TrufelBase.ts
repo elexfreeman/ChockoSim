@@ -1,6 +1,6 @@
 import BaseProduct from "../Objects/Products/BaseProduct";
 import Core from "../Sys/Core";
-import { report } from "process";
+import { ProductIngredientI } from "../Objects/Products/IngredientsI";
 export interface MassaPercentI {
     ingredientKey: number,
     sIngredient: string;
@@ -27,7 +27,7 @@ export class TrufelBase extends BaseProduct {
         const aMassaPercent = this.fGetMassaPercent();
         for (let k = 0; k < aMassaPercent.length; k++) {
             const ingredientKey = aMassaPercent[k].ingredientKey;
-            this.data.ingredients[ingredientKey].amount = nMassa * 100 / aMassaPercent[k].nPercent;
+            this.data.ingredients[ingredientKey].amount = nMassa * aMassaPercent[k].nPercent / 100;
         }
     }
 
@@ -54,5 +54,22 @@ export class TrufelBase extends BaseProduct {
             });
         }
         return resp;
+    }
+
+
+    public fPrintIngredientsTotalPrice() {
+        let out: ProductIngredientI[] = this.data.ingredients;
+        let totalAmout: number = 0;
+        for (let i = 0; i < out.length; i++) {
+            console.log(`
+Ингредиент: ${out[i].ingredient.caption}
+Цена за грамм: ${(out[i].ingredient.price).toFixed(2)}
+Вес в граммах: ${(out[i].amount).toFixed(2)}
+Итого: ${(out[i].ingredient.price * out[i].amount).toFixed(2)}
+            
+            `);
+            totalAmout += out[i].amount;
+        }
+        console.log('Общий все:', totalAmout);
     }
 }

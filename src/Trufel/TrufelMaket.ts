@@ -54,7 +54,7 @@ export class TrufelMaker {
     }
 
 
-    public fGetIngredientsToralPrice() {
+    public fGetIngredientsTotalPrice() {
         let out: ProductIngredientI[] = this.fGetIngredients();
         let totalAmout: number = 0;
         for (let i = 0; i < out.length; i++) {
