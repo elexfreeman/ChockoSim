@@ -29,3 +29,18 @@ export const slivki: IngredientsI = {
     caption: 'Сливки', // название
     price: 352 / 1000,
 }
+////////
+////////
+////////
+export const lemongras: IngredientsI = {
+    caption: 'Лемонграсс', // название
+    price: 352 / 1000,
+}
+//export const matcha: IngredientsI = {
+//    caption: 'Матча', // название
+//    price: 352 / 1000,
+//}
+//export const matcha: IngredientsI = {
+//    caption: 'Матча', // название
+//    price: 352 / 1000,
+//}
